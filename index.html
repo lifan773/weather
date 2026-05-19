@@ -12,7 +12,7 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
       background: linear-gradient(160deg, #e8f0fe 0%, #d4e4fc 40%, #f0f4ff 100%);
       min-height: 100vh;
       display: flex;
@@ -27,7 +27,10 @@
 
     /* Header */
     .header {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
       margin-bottom: 32px;
     }
 
@@ -36,6 +39,24 @@
       font-weight: 700;
       color: #1a3a6b;
       letter-spacing: -0.3px;
+    }
+
+    .lang-toggle {
+      padding: 6px 14px;
+      border: 2px solid #2563eb;
+      border-radius: 20px;
+      background: #fff;
+      color: #2563eb;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .lang-toggle:hover {
+      background: #2563eb;
+      color: #fff;
     }
 
     /* Search */
@@ -238,7 +259,7 @@
       opacity: 0.5;
     }
 
-    /* API key prompt */
+    /* API key hint */
     .api-key-hint {
       text-align: center;
       margin-top: 40px;
@@ -271,17 +292,19 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>Weather Dashboard</h1>
+      <h1 data-i18n="title">Weather Dashboard</h1>
+      <button class="lang-toggle" id="langToggle">中文</button>
     </div>
 
     <div class="search-bar">
       <input
         type="text"
         id="cityInput"
+        data-i18n-placeholder="placeholder"
         placeholder="Enter a city name..."
         autocomplete="off"
       />
-      <button id="searchBtn">Search</button>
+      <button id="searchBtn" data-i18n="searchBtn">Search</button>
     </div>
 
     <div class="error" id="errorMsg"></div>
@@ -290,7 +313,7 @@
       <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#6b8ab5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
       </svg>
-      Search for a city to see the weather
+      <span data-i18n="emptyState">Search for a city to see the weather</span>
     </div>
 
     <div class="current-card" id="currentCard">
@@ -303,18 +326,18 @@
       </div>
       <div class="current-details">
         <div class="detail-block">
-          <div class="detail-label">Temperature</div>
+          <div class="detail-label" data-i18n="temperature">Temperature</div>
           <div class="detail-value" id="tempValue">--<span class="detail-unit">&deg;F</span></div>
         </div>
         <div class="detail-block">
-          <div class="detail-label">Humidity</div>
+          <div class="detail-label" data-i18n="humidity">Humidity</div>
           <div class="detail-value small" id="humidityValue">--<span class="detail-unit">%</span></div>
         </div>
       </div>
     </div>
 
     <div class="forecast-section" id="forecastSection">
-      <div class="forecast-title">5-Day Forecast</div>
+      <div class="forecast-title" data-i18n="forecastTitle">5-Day Forecast</div>
       <div class="forecast-list" id="forecastList"></div>
     </div>
   </div>
@@ -323,7 +346,7 @@
   <script src="app.js"></script>
 
   <div class="api-key-hint">
-    Get a free API key at <a href="https://openweathermap.org/api" target="_blank" rel="noopener">openweathermap.org/api</a>
+    <span data-i18n="apiHint">Get a free API key at</span> <a href="https://openweathermap.org/api" target="_blank" rel="noopener">openweathermap.org/api</a>
   </div>
 </body>
 </html>
